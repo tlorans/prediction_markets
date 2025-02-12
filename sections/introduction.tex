@@ -1,0 +1,55 @@
+
+\section{Introduction}
+
+
+General intro predictive markets.
+
+
+Prediction market is generally implemented as a wager (or contract) that 
+pays off if a particular outcome, taking a particular value $y$, occurs.
+Assuming that both the efficient markets hypothesis holds, 
+and that the market acts as a risk-neutral representative trader, the price 
+of the contract will be the best estimate of various parameters tied 
+to the probability of that outcome \cite{wolfers2012prediction}.
+
+\begin{table}[h]
+    \centering
+    \caption{Contract Types: Estimating Uncertain Quantities or Probabilities}
+    \label{tab:contract_types}
+    \begin{tabular}{lp{4cm}p{4cm}p{4cm}}
+        \toprule
+        \textbf{Contract} & \textbf{Example}                                                                 & \textbf{Details}                                                                                           & \textbf{Reveals market expectation of...} \\
+        \midrule
+        Winner-takes-all  & Outcome $y$: Level of initial unemployment claims (in thousands).                & Contract costs $p$. Pays \$1 if and only if event $y$ occurs. Bid according to the value of $p$.           & Probability that outcome $y$ occurs.      \\
+        \midrule
+        Index             & Contract pays \$1 for every 1,000 initial unemployment claims.                   & Contract pays \$ $y$.                                                                                      & Mean value of outcome $y$: $E[y]$.        \\
+        \midrule
+        Spread            & Contract pays even money if initial unemployment claims are greater than $y^{*}$ & Contract cost \$ 1. Pays \$2 if $y \ge y^{*}$. Pays \$ 0 otherwise. Bid according to the value of $y^{*}$. & Median value of outcome $y$.              \\
+        \bottomrule
+    \end{tabular}
+    \vspace{0.5cm}
+    
+    \footnotesize{\textit{Notes:} Adapted from Table 1 in Wolfers and Zitzewitz (2004).}
+\end{table}
+
+Predictive markets have demonstrated their 
+ability to aggregate dispersed information and 
+improve forecasting accuracy in various domains. 
+However, in the context of climate science, 
+predictive markets remain underexplored. 
+Traditional climate modeling faces key challenges: 
+
+\begin{itemize}
+    \item a lack of systematic assessment of forecasts, leading to information asymmetries, and
+    \item the absence of direct financial incentives for accurate predictions.
+\end{itemize}
+This paper proposes climate predictive markets as 
+a mechanism to enhance forecasting quality, 
+incentivize expert participation, and 
+improve societal preparedness for climate-related risks.
+We examine the potential benefits of 
+climate predictive markets for two key stakeholders:
+\begin{itemize}
+    \item Market Makers: What are the financial incentives for creating and maintaining such a market?
+    \item Climate Experts (Smart Money): Can climate specialists leverage their knowledge profitably, and do they require the presence of less-informed participants to realize gains?
+\end{itemize}

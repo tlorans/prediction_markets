@@ -1,0 +1,598 @@
+\documentclass{beamer}
+
+% Load required packages
+\usepackage{graphicx} % For graphics
+\usepackage{amsmath} % For mathematical symbols
+\usepackage{tikz} % For diagrams
+\usetikzlibrary{positioning,shapes.geometric} % TikZ libraries
+\usepackage{tabularx} % For adjusting table width
+\usepackage{booktabs} % For better table formatting
+\usepackage{amsfonts} % For fonts
+
+% Load hyperref options beforehand to avoid clashes
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% Changes package with options that won’t cause clashes
+% \usepackage[draft, authormarkuptext=id, todonotes={textsize=tiny, textwidth=2cm}, addedmarkup=colored]{changes} % Remove dashline option to avoid warning
+\usepackage{subcaption} % For subfigures
+\usepackage{float} % For floating elements
+\usepackage[font=footnotesize,labelfont=bf]{caption} % For caption formatting
+\usepackage[round,authoryear]{natbib}
+
+% Beamer theme and presentation settings
+\mode<presentation> {
+  \usetheme{default}
+  \usecolortheme{default}
+  \usefonttheme{default}
+  \setbeamertemplate{navigation symbols}{} % Remove navigation symbols
+  \setbeamertemplate{caption}[numbered]
+}
+
+% Custom footline to show only title and slide numbers
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex} % Slide number / Total slides
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Title and author information
+\title[Beyond Carbon Price]{A Scenario-Based Quantification of Portfolio Financial Loss From Climate Transition Risks}
+\author{Thomas Lorans \and Julien Priol \and Vincent Bouchet}
+\institute[SP]{Scientific Portfolio}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage % Title page
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents % Table of contents slide
+\end{frame}
+
+% Start of presentation slides
+\section{Sources of Transition Risks in the Cash Flows Channel}
+
+\begin{frame}{Sources of Transition Risks in the Cash Flows Channel}
+
+  \begin{itemize}
+    \item When transition concerns increase unexpectedly, market expectations about future cash flows may shift
+    \item Markets may revise their assumptions from a continuation of current policies to a stricter transition towards a low-carbon economy
+    \item In such a scenario, "brown" firms could see diminished future cash flows due to declining demand and rising carbon costs, while "green" firms may benefit
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Sources of Transition Risks in the Cash Flows Channel}
+  \begin{itemize}
+    \item We adopt a model-based approach using climate scenarios to investigate the potential losses in firm value due to changes in expectations about future cash flows
+    \item With a free cash flows model, we decompose the likely sources of changes in expected cash flows, offering insights into how an unexpected strengthening in climate transition concerns could lead to value losses
+  \end{itemize}
+  This decomposition allows us to understand the repricing effects of unexpected changes in transition concerns through two main dimensions:
+  \begin{itemize}
+    \item The net carbon tax effect
+    \item The revenue effect
+  \end{itemize}
+\end{frame}
+
+
+
+\section{The Importance of the Revenue Dimension}
+% Slide 1: Introduction to Transition Risks by Sector
+\begin{frame}{The Importance of the Revenue Dimension}
+  The last column in Table \ref{tab:loss-per-sector} shows that the revenue dimension is the main source of transition risks in 8 out of 10 TRBC sectors.
+  \begin{itemize}
+    \item Sectors such as Utilities, Energy, Basic Materials, and Industrials exhibit the highest overall losses.
+    \item Utilities face the largest potential value loss, up to 57.85\% (see Table \ref{tab:loss-per-sector}).
+  \end{itemize}
+\end{frame}
+
+% Slide 3: Exhibit 5 - Loss Per Sector Table with Resizing
+\begin{frame}{The Importance of the Revenue Dimension}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Sector}       & \textbf{Total (\%)} & \textbf{From net carbon tax (\%)} & \textbf{From revenue (\%)} & \textbf{Revenue / carbon tax ratio} \\
+        \hline
+        Utilities             & 57.85               & 22.24                             & 35.6                       & 1.60                                \\
+        Energy                & 33.09               & 12.36                             & 20.73                      & 1.68                                \\
+        Basic Materials       & 21.96               & 20.99                             & 0.97                       & 0.05                                \\
+        Industrials           & 9.81                & 4.85                              & 4.96                       & 1.02                                \\
+        Non-Cyclical Consumer & 4.74                & 2.9                               & 1.84                       & 0.63                                \\
+        Financials            & 3.08                & 1.22                              & 1.86                       & 1.53                                \\
+        Healthcare            & 2.45                & 0.71                              & 1.74                       & 2.45                                \\
+        Telecoms              & 2.08                & 0.29                              & 1.8                        & 6.29                                \\
+        Technology            & 1.83                & 0.33                              & 1.51                       & 4.58                                \\
+        Cyclical Consumer     & -1.57               & 1.68                              & -3.25                      & 1.93                                \\
+        MSCI World            & 5.90                & 2.91                              & 2.99                       & 1.03                                \\
+        \hline
+      \end{tabular}}
+    \caption{Loss per sector}
+    \label{tab:loss-per-sector}
+  \end{table}
+\end{frame}
+
+
+
+
+\section{Green (Brown) Stocks Outperformance (Underperformance)}
+
+\begin{frame}{Green (Brown) Stocks Outperformance (Underperformance)}
+  \begin{itemize}
+    \item Unexpected changes in transition concerns
+          may lead to “winners” (stocks with negative losses)
+          and “losers” (stocks with positive losses)
+    \item Particularly visible in the Energy and Utilities sectors where both "winners" (stocks with negative losses) and "losers" can be found (see Table \ref{tab:total-loss})
+    \item While carbon dimension (Table \ref{tab:loss-carbon-tax}) consistently has a negative impact (with positive losses), the revenue dimension distinctly separates "winners" from "losers" (Table \ref{tab:loss-revenue})
+  \end{itemize}
+
+
+\end{frame}
+
+
+% Slide: Exhibit 6 - Summary statistics by sector: total loss
+\begin{frame}{Green (Brown) Stocks Outperformance (Underperformance)}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Sector} & \textbf{Nber of stocks} & \textbf{Mean} & \textbf{Std dev} & \textbf{Min} & \textbf{Max} & \textbf{Q1} & \textbf{50\%} & \textbf{Q3} \\
+        \hline
+        Utilities       & 69                      & 51.76         & 27.37            & -97.51       & 71.09        & 49.54       & 58.92         & 67.28       \\
+        Energy          & 59                      & 30.77         & 22.06            & -84.63       & 57.05        & 27.40       & 33.28         & 43.80       \\
+        Basic Materials & 88                      & 21.97         & 20.22            & -0.68        & 66.70        & 5.13        & 15.19         & 32.95       \\
+        Industrials     & 215                     & 8.40          & 13.06            & -13.66       & 65.06        & 1.90        & 2.48          & 7.82        \\
+        MSCI World      & 1287                    & 9.23          & 16.97            & -97.51       & 71.09        & 1.83        & 2.17          & 5.32        \\
+        \hline
+      \end{tabular}}
+    \caption{Summary statistics by sector: total loss}
+    \label{tab:total-loss}
+  \end{table}
+\end{frame}
+
+% Slide: Exhibit 7 - Summary statistics by sector: loss from net carbon tax
+\begin{frame}{Green (Brown) Stocks Outperformance (Underperformance)}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Sector} & \textbf{Nber of stocks} & \textbf{Mean} & \textbf{Std dev} & \textbf{Min} & \textbf{Max} & \textbf{Q1} & \textbf{50\%} & \textbf{Q3} \\
+        \hline
+        Utilities       & 69                      & 22.43         & 25.44            & 0.03         & 138.02       & 5.05        & 16.86         & 30.17       \\
+        Energy          & 59                      & 12.74         & 10.34            & 0.14         & 33.87        & 4.89        & 9.47          & 18.40       \\
+        Basic Materials & 88                      & 20.34         & 20.29            & 0.09         & 64.37        & 4.03        & 13.56         & 32.01       \\
+        Industrials     & 215                     & 4.24          & 10.61            & 0.00         & 63.42        & 0.27        & 0.67          & 1.5         \\
+        MSCI World      & 1287                    & 4.66          & 11.74            & 0.00         & 138.02       & 0.08        & 0.43          & 2.26        \\
+        \hline
+      \end{tabular}}
+    \caption{Summary statistics by sector: loss from net carbon tax}
+    \label{tab:loss-carbon-tax}
+  \end{table}
+\end{frame}
+
+% Slide: Exhibit 8 - Summary statistics by sector: loss from revenue
+\begin{frame}{Green (Brown) Stocks Outperformance (Underperformance)}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Sector} & \textbf{Nber of stocks} & \textbf{Mean} & \textbf{Std dev} & \textbf{Min} & \textbf{Max} & \textbf{Q1} & \textbf{50\%} & \textbf{Q3} \\
+        \hline
+        Utilities       & 69                      & 29.33         & 31.89            & -97.85       & 49.01        & 20.15       & 46.49         & 48.88       \\
+        Energy          & 59                      & 18.03         & 16.10            & -85.03       & 39.93        & 23.16       & 23.25         & 23.27       \\
+        Basic Materials & 88                      & 1.62          & 3.06             & -17.35       & 21.89        & 1.62        & 1.63          & 1.63        \\
+        Industrials     & 215                     & 4.16          & 6.45             & -15.21       & 18.35        & 1.65        & 1.65          & 1.65        \\
+        MSCI World      & 1287                    & 4.57          & 11.34            & -97.85       & 49.01        & 1.65        & 1.74          & 1.81        \\
+        \hline
+      \end{tabular}}
+    \caption{Summary statistics by sector: loss from revenue}
+    \label{tab:loss-revenue}
+  \end{table}
+\end{frame}
+
+
+\begin{frame}{Green (Brown) Stocks Outperformance (Underperformance)}
+  We present the five stocks in the Utilities sector with the highest loss from revenue and the five stocks with the lowest loss (i.e., potential opportunity) in Table \ref{tab:top-10-utilities}.
+  \begin{itemize}
+    \item The “browner” stocks (100\% of revenue coming from brown technologies) all face a potential loss of 49\% (due to the exposition to the same technology)
+    \item On the other side of the revenue dimension, “greener” stocks represent a sizeable source of opportunities, with up to 97.85\% of value gain for example
+    \item Green (brown) stocks perform better (worse) than expected if transition concerns strengthen unexpectedly
+  \end{itemize}
+\end{frame}
+
+% Slide: Exhibit 9 - Top 10 MSCI World Constituents in the Utilities Sector
+\begin{frame}{Green (Brown) Stocks Outperformance (Underperformance)}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Stock}                     & \textbf{From revenue (\%)} & \textbf{Rank} & \textbf{Green revenue (\%)} & \textbf{Brown revenue (\%)} \\
+        \hline
+        Elia Group SA/NV                   & 49.01                      & Top 5         & 0.00                        & 100.00                      \\
+        Redeia Corporación, S.A.           & 49.01                      &               & 0.00                        & 100.00                      \\
+        Exelon Corporation                 & 49.01                      &               & 0.00                        & 100.00                      \\
+        Eversource Energy                  & 49.01                      &               & 0.00                        & 100.00                      \\
+        Hydro One Limited                  & 49.01                      &               & 0.00                        & 100.00                      \\
+        \hline
+        EDP Renováveis, S.A.               & -97.85                     & Bottom 5      & 99.48                       & 0.52                        \\
+        Chubu Electric Power Company, Inc. & -70.80                     &               & 79.00                       & 21.00                       \\
+        Northland Power Inc.               & -60.51                     &               & 71.16                       & 28.84                       \\
+        Mercury NZ Limited                 & -53.91                     &               & 66.26                       & 33.74                       \\
+        Orsted A/S                         & -52.15                     &               & 65.00                       & 35.00                       \\
+        \hline
+      \end{tabular}}
+    \caption{Top 10 MSCI World constituents in the Utilities sector based on revenue impact \\}
+    \label{tab:top-10-utilities}
+  \end{table}
+\end{frame}
+
+
+
+
+\section{Carbon Intensity Doesn't Tell the Whole Story}
+
+
+\begin{frame}{Carbon Intensity Doesn't Tell the Whole Story}
+  \begin{itemize}
+    \item The (log of) Scope 1 carbon intensity relates – at least partially – to the loss from the net carbon tax (see Figure \ref{fig:regScope1})
+    \item We find out no relationship between Scope 1 carbon intensity and the loss from revenue
+    \item Scope 1-2 carbon intensity displays a similar pattern (see the relationship in Figure \ref{fig:regScope12})
+    \item The relationship almost disappears when considering the Scope 3 emissions (see Figure \ref{fig:regScope123})
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Carbon Intensity Doesn't Tell the Whole Story}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/regScope1.png}
+    \caption{Relationship between carbon intensity and transition risks. Scope 1.}
+    \label{fig:regScope1}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}{Carbon Intensity Doesn't Tell the Whole Story}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/RegScope12.png}
+    \caption{Relationship between carbon intensity and transition risks. Scope 1 and 2.}
+    \label{fig:regScope12}
+  \end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Carbon Intensity Doesn't Tell the Whole Story}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/RegScope123.png}
+    \caption{Relationship between carbon intensity and transition risks. Scope 1, 2 and 3.}
+    \label{fig:regScope123}
+  \end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Carbon Intensity Doesn't Tell the Whole Story}
+  If traditional carbon intensity indicators fail to capture the revenue dimension of transition risks, what alternative can be used?
+  \begin{itemize}
+    \item Figure \ref{fig:greenrev} explores the relationship between net green revenue (calculated as green revenue minus brown revenue) and the revenue dimension for the Energy, Utilities, and Industrials sectors
+    \item Colours in Figure \ref{fig:greenrev} identify the technology constituting the main source of revenue
+    \item We observe a clear an intuitive relationship. In the Utilities sector for instance, stocks with the higher net green revenue are the clear “winner” of the transition (and vice versa)
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Carbon Intensity Doesn't Tell the Whole Story}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/NetGreenRev.png}
+    \caption{Relationship between net green revenue and transition risks.}
+    \label{fig:greenrev}
+  \end{figure}
+
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Unexpected changes in transition concerns can lead to significant value losses for firms
+    \item The revenue dimension is the main source of transition risks in most sectors
+    \item Green stocks outperform brown stocks in terms of revenue impact
+    \item Carbon intensity alone does not capture the full story of transition risks
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Q\&A}
+  \Huge{\centerline{Thank You!}}
+  \Huge{\centerline{Any Questions?}}
+\end{frame}
+
+\appendix
+
+\section*{Appendix}
+
+% Slide 1: Introduction to Cash Flow Model
+\begin{frame}{Appendix: Cash Flow Model Overview}
+  To model firm-level cash flows, let $\text{CF}_{i,t}$ denote the cash flows of firm $ i $ at time $ t $, under an expected transition scenario. We assume the following cash flow structure:
+  \begin{equation}
+    \text{CF}_{i,t} = Y_{i,t} (1 - \omega_{i,t} - \theta - \tau - \rho)
+  \end{equation}
+  where:
+  \begin{itemize}
+    \item $ Y_{i,t} $ represents sales,
+    \item $ \omega_{i,t} $ is the carbon cost rate,
+    \item $ \theta $ is the operating cost rate,
+    \item $ \tau $ is the tax rate,
+    \item $ \rho $ is the net investment rate.
+  \end{itemize}
+\end{frame}
+
+% Slide 2: Carbon Costs Rate
+\begin{frame}{Appendix: Carbon Cost Rate}
+  The carbon costs rate, $ \omega_{i,t} $, is modeled as:
+  \begin{equation}
+    \omega_{i,t} = \min(\sigma_i \times \Lambda_t, 1 - \tau - \theta - \rho)
+  \end{equation}
+  where:
+  \begin{itemize}
+    \item $ \sigma_i $ is the carbon intensity of stock $ i $,
+    \item $ \Lambda_t $ is the carbon price.
+  \end{itemize}
+\end{frame}
+
+% Slide 3: Sales Dynamics
+\begin{frame}{Appendix: Sales Dynamics}
+  Firm sales $ Y_{i,t} $ are the sum of sales from individual products $ s $:
+  \begin{equation}
+    Y_{i,t} = \sum_{S} Y_{i,s,0} \times \frac{Y_{s,t}}{Y_{s,0}}
+  \end{equation}
+  where:
+  \begin{itemize}
+    \item $ Y_{i,s,0} $ is the initial sales of product $ s $ for stock $ i $,
+    \item $ \frac{Y_{s,t}}{Y_{s,0}} $ is the growth factor of the product’s demand over time.
+  \end{itemize}
+\end{frame}
+
+% Slide 1: Discounting Cash Flows
+\begin{frame}{Appendix: Discounting Cash Flows}
+  We discount the cash flows using the weighted average cost of capital (WACC):
+  \begin{equation}
+    \text{DCF}_{i,t} = \frac{\text{CF}_{i,t}}{(1 + \text{WACC})^t}
+  \end{equation}
+  Assuming WACC remains constant, we focus on identifying the impact of transition risks on the discounted cash flows (DCF).
+\end{frame}
+
+% Slide 2: Sensitivity of DCF to Carbon Cost Rate and Projected Sales
+\begin{frame}{Appendix: DCF Sensitivity Analysis}
+  We calculate the sensitivity of DCF to changes in the carbon cost rate $\omega_{i,t}$ and projected sales $Y_{i,t}$:
+  \begin{equation}
+    \frac{\partial \text{DCF}_{i,t}}{\partial \omega_{i,t}} = -\frac{Y_{i,t}}{(1 + \text{WACC})^t}
+  \end{equation}
+  \begin{equation}
+    \frac{\partial \text{DCF}_{i,t}}{\partial Y_{i,t}} = \frac{(1 - \omega_{i,t} - \tau - \theta - \rho)}{(1 + \text{WACC})^t}
+  \end{equation}
+  These partial derivatives represent the sensitivity of the discounted cash flows to the carbon cost rate and sales.
+\end{frame}
+
+% Slide 3: Cross Sensitivity of DCF to Carbon Cost Rate and Sales
+\begin{frame}{Appendix: Cross Sensitivity of DCF}
+  The cross-sensitivity of DCF with respect to both the carbon cost rate and projected sales is:
+  \begin{equation}
+    \frac{\partial^2 \text{DCF}_{i,t}}{\partial \omega_{i,t} \, \partial Y_{i,t}} = -\frac{1}{(1 + \text{WACC})^t}
+  \end{equation}
+  This captures the combined impact of changes in both $\omega_{i,t}$ and $Y_{i,t}$ on the discounted cash flows.
+\end{frame}
+
+% Slide 4: Impact of Climate Scenarios on DCF
+\begin{frame}{Appendix: Impact of Climate Scenarios on DCF}
+  The impact on firm $i$’s discounted cash flows due to climate scenarios can be expressed as:
+  \begin{equation}
+    \Delta \text{DCF}_{i,t}^Y = \frac{\partial \text{DCF}_{i,t}}{\partial Y_{i,t}} \times \Delta Y_{i,t}
+  \end{equation}
+  \begin{equation}
+    \Delta \text{DCF}_{i,t}^\omega = \frac{\partial \text{DCF}_{i,t}}{\partial \omega_{i,t}} \times \Delta \omega_{i,t}
+  \end{equation}
+  \begin{equation}
+    \Delta \text{DCF}^{Y \times \omega} = \frac{\partial^2 \text{DCF}_{i,t}}{\partial \omega_{i,t} \, \partial Y_{i,t}} \times \Delta \omega_{i,t} \, \Delta Y_{i,t}
+  \end{equation}
+  where $\Delta Y_{i,t}$ and $\Delta \omega_{i,t}$ are the differences in projected sales and carbon cost rate between the initial scenario and the new expectations.
+\end{frame}
+
+% Slide 5: Total Impact on Discounted Cash Flows
+\begin{frame}{Appendix: Total Impact on Discounted Cash Flows}
+  The total impact of the transition scenario on firm $i$'s discounted cash flows is:
+  \begin{equation}
+    \Delta \text{DCF}_{i,t} = \Delta \text{DCF}_{i,t}^Y + \Delta \text{DCF}_{i,t}^\omega + \Delta \text{DCF}_{i,t}^{Y \times \omega}
+  \end{equation}
+\end{frame}
+
+% Slide 6: Translating DCF into Stock Value
+\begin{frame}{Appendix: Translating DCF into Stock Value}
+  We translate the discounted cash flows into the stock value, where the total firm value $V_i$ is the sum of discounted cash flows over time:
+  \begin{equation}
+    V_i = \sum_{t=1}^T \text{DCF}_{i,t}
+  \end{equation}
+  The change in stock value due to unexpected transition concerns is:
+  \begin{equation}
+    \Delta V_i = \Delta V_i^Y + \Delta V_i^\omega + \Delta V_i^{Y \times \omega}
+  \end{equation}
+\end{frame}
+
+% Slide 7: Computing Losses from Transition Risks
+\begin{frame}{Appendix: Computing Losses from Transition Risks}
+  The loss from each factor is computed as a ratio to the baseline stock value $V_i^\text{baseline}$:
+  \begin{equation}
+    L_i^Y = -\frac{\Delta V_i^Y}{V_i^\text{baseline}} \quad L_i^\omega = -\frac{\Delta V_i^\omega}{V_i^\text{baseline}} \quad L_i^{Y \times \omega} = -\frac{\Delta V_i^{Y \times \omega}}{V_i^\text{baseline}}
+  \end{equation}
+\end{frame}
+
+% Slide 8: Total Loss Computation
+\begin{frame}{Appendix: Total Loss Computation}
+  The loss from net carbon tax is computed as the sum of losses from carbon and the interaction term:
+  \begin{equation}
+    L_i^{\omega^\text{net}} = L_i^\omega + L_i^{Y \times \omega}
+  \end{equation}
+  The total loss of stock $i$ is:
+  \begin{equation}
+    L_i = L_i^Y + L_i^{\omega^\text{net}}
+  \end{equation}
+\end{frame}
+
+
+% Slide 1: Calibration Overview
+\begin{frame}{Appendix: Calibration of Growth Factors and Carbon Price}
+  To calibrate the growth factors of product demand $ \frac{Y_{s,t}}{Y_{s,0}} $ and the carbon price $ \Lambda_t $, we use data from the
+  Network for Greening the Financial Systems (NGFS)
+  scenarios database.
+  \begin{itemize}
+    \item The reference scenario is "Current Policies."
+    \item The default transition scenario is "Net Zero 2050."
+    \item Products particularly exposed to changes in mitigation policies
+          were identified, with non-specific products
+          grouped under the "Other" category.
+    \item Growth factors are mapped to NGFS variables.
+  \end{itemize}
+\end{frame}
+
+% Slide 2: Product and NGFS Variable Mapping Table
+\begin{frame}{Appendix: Product and NGFS Variable Mapping}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Product}            & \textbf{NGFS Variable}                  \\
+        \hline
+        Other                       & GDP|MER|Counterfactual without damage   \\
+        Fossil Fuels Electricity    & Secondary Energy|Electricity|Coal       \\
+                                    & Secondary Energy|Electricity|Gas        \\
+                                    & Secondary Energy|Electricity|Oil        \\
+        Low Carbon Electricity      & Secondary Energy|Electricity|Biomass    \\
+                                    & Secondary Energy|Electricity|Geothermal \\
+                                    & Secondary Energy|Electricity|Hydro      \\
+                                    & Secondary Energy|Electricity|Solar      \\
+                                    & Secondary Energy|Electricity|Wind       \\
+                                    & Secondary Energy|Electricity|Nuclear    \\
+        Fossil Fuels                & Primary Energy|Coal                     \\
+                                    & Primary Energy|Gas                      \\
+                                    & Primary Energy|Oil                      \\
+                                    & Secondary Energy|Gases                  \\
+                                    & Secondary Energy|Liquids                \\
+        Hydrogen                    & Secondary Energy|Hydrogen               \\
+        Alternative Transportation  & Final Energy|Transportation|Electricity \\
+                                    & Final Energy|Transportation|Hydrogen    \\
+        Conventional Transportation & Final Energy|Transportation|Electricity \\
+                                    & Final Energy|Transportation|Liquids     \\
+        \hline
+      \end{tabular}}
+    \caption{Product mapping to NGFS variables used for growth factor calibration \\ \scriptsize Note: The table presents products mapped to NGFS scenario variables to calibrate growth factors, assessing exposure to changes in mitigation policies.}
+  \end{table}
+\end{frame}
+
+% Slide 3: Revenue Calibration Algorithm
+\begin{frame}{Appendix: Calibration of Initial Revenue per Product}
+  To determine the initial revenue per product $ Y_{i,s,0} $:
+  \begin{enumerate}
+    \item We use Moody’s data and NACE codes to map products.
+    \item Non-mapped NACE activities are assigned to "Other."
+  \end{enumerate}
+  Algorithm:
+  \begin{itemize}
+    \item For each stock $ i $, assign a percentage of revenue based on available data.
+    \item Deduct assigned percentage from 100\% and assign the remaining to the NACE-mapped category.
+  \end{itemize}
+\end{frame}
+
+% Slide 4: Calibrated Parameters by TRBC Sector Table
+\begin{frame}{Appendix: Calibrated Parameters by TRBC Sector}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Sector}       & \textbf{WACC} & \textbf{Tax Rate ($\tau$)} & \textbf{Operating Costs Rate ($\theta$)} & \textbf{Net Investments Rate ($\rho$)} \\
+        \hline
+        Industrials           & 0.091         & 0.201                      & 0.116                                    & 0.071                                  \\
+        Basic Materials       & 0.094         & 0.140                      & 0.090                                    & 0.038                                  \\
+        Cyclical Consumer     & 0.091         & 0.138                      & 0.308                                    & -0.005                                 \\
+        Energy                & 0.086         & 0.136                      & 0.068                                    & 0.022                                  \\
+        Financials            & 0.075         & 0.036                      & 0.232                                    & -0.032                                 \\
+        Non-Cyclical Consumer & 0.073         & 0.174                      & 0.241                                    & 0.122                                  \\
+        Technology            & 0.107         & 0.079                      & 0.270                                    & 0.026                                  \\
+        Telecoms              & 0.077         & 0.178                      & 0.309                                    & 0.016                                  \\
+        Utilities             & 0.082         & 0.141                      & 0.190                                    & 0.116                                  \\
+        Total                 & 0.064         & 0.125                      & 0.221                                    & 0.032                                  \\
+        \hline
+      \end{tabular}}
+    \caption{Calibrated parameters by TRBC sector \\ \scriptsize Note: The table presents the Weighted-Average Cost of Capital (WACC), Tax Rate ($\tau$), Operating Costs Rate ($\theta$), and Net Investments Rate ($\rho$) for each sector, calibrated using data from Damodaran Online.}
+  \end{table}
+\end{frame}
+
+% Slide 5: Parameter Calibration Explanation
+\begin{frame}{Appendix: Explanation of Parameter Calibration}
+  We used various financial fields for calibration:
+  \begin{itemize}
+    \item \textbf{WACC}: Calibrated using the Cost of Capital field.
+    \item \textbf{Tax Rate ($\tau$)}: Derived from the Tax Rate field.
+    \item \textbf{Operating Costs Rate ($\theta$)}: Calculated as the difference between Gross Margin and Pre-tax, Pre-stock compensation Operating Margin.
+    \item \textbf{Net Investments Rate ($\rho$)}: Calibrated with the Net Capex/Sales field.
+  \end{itemize}
+\end{frame}
+
+
+% Slide 9: Sensitivity to Calibration Settings Table
+\begin{frame}{Appendix: Sensitivity to Calibration Settings}
+  \begin{table}
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Sector} & \textbf{Max-Min Scenario} & \textbf{Max-Min Model} & \textbf{Max-Min Horizon} \\
+        \hline
+        Utilities       & 47.92                     & 6.72                   & 28.51                    \\
+        Energy          & 29.76                     & 10.37                  & 20.60                    \\
+        Basic Materials & 20.87                     & 9.81                   & 12.97                    \\
+        Industrials     & 8.63                      & 4.79                   & 6.76                     \\
+        MSCI World      & 5.83                      & 1.15                   & 3.66                     \\
+        \hline
+      \end{tabular}}
+    \caption{Sensitivity to calibration settings \\ \scriptsize Note: The table compares loss sensitivity to scenarios, models, and horizons. Higher values indicate greater uncertainty from calibration setting choices.}
+  \end{table}
+\end{frame}
+
+
+% Bibliography
+\bibliographystyle{plainnat}
+\bibliography{../bib/refs}
+
+\end{document}
+

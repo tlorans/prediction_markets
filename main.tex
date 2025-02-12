@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+
+% Preamble with package inclusions and definitions
+\usepackage{styles/mystyle}  % Custom style
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{shorttoc}%
+\usepackage{booktabs}
+\usepackage{gensymb}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+\usepackage{subcaption} % for subfigures
+\usepackage{needspace}
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage{lscape}
+
+% Directory for images
+\graphicspath{{images/}}
+
+\title{Prediction Markets: Rewarding Expertise and Enhancing Forecasting Accuracy
+}
+\author{Thomas Lorans\thanks{Email: thomas.lorans@scientificportfolio.com} \\ EDHEC Climate Research Institute}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  xxx
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+% Include chapters
+\include{sections/introduction}
+\include{sections/literature}
+\include{sections/methodology}
+\include{sections/results}
+\include{sections/conclusion}
+% Add more chapters as needed
+
+% Bibliography
+\bibliographystyle{bib/rfs}
+\bibliography{bib/refs}
+
+
+
+\end{document}
+

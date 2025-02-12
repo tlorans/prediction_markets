@@ -1,0 +1,19 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Dong et~al.(2024)Dong, Zheng, Li, and Zhou}]{dong2024distilling}
+Dong, L., H.~Zheng, L.~Li, and C.~Zhou. 2024.
+\newblock Distilling wisdom of crowds in online communities: A novel prediction
+  market constructed with comment posters.
+\newblock \emph{Decision Support Systems} 180:114190--.
+
+\bibitem[{Hsu(2011)}]{hsu2011prediction}
+Hsu, S.-L. 2011.
+\newblock A prediction market for climate outcomes.
+\newblock \emph{U. Colo. L. Rev.} 83:179--.
+
+\end{thebibliography}

@@ -1,0 +1,259 @@
+\section{Methodology}
+
+\subsection{Market}
+
+
+Consider a model that generates a forecast for a specific event, with result $A$ or $B$.
+Let $s \in \{0, 1\}$ denote the outcome realization, where $s = 1$ if 
+event $A$ occurs and $s = 0$ otherwise. Let $p_t$ denote the probability 
+with which the event $s = 1$ is predicted to occur, according to the model 
+forecast at data $t$. 
+
+Now suppose that there exists a prediction market listing a contract 
+that pays one dollar if event $A$ occurs and zero dollars otherwise. 
+Let $q_t$ denote the price of this contract at date $t$. This price 
+may differ from the model forecast $p_t$, in which case a trader who 
+believes the model will recognize a profit opportunity.
+
+To facilitate trading, we introduce an automated market maker who sets the price
+$q_t$ of the contract. We employ the Logarithmic Market Scoring Rule (LMSR),
+a market-making algorithm that dynamically adjusts prices based on trader demand 
+while maintaining a bounded cost function. 
+The LMSR mechanism ensures liquitdity at all times and updates the contract 
+price to reflect the collective information of market participants.
+
+The LMSR maintains a market consisting of a single market maker who sets 
+the price of the event-contingent contract. The market maker employs 
+a cost function $C(q_A, q_B)$ that determines the total cost 
+required to purchase a given quantity of contracts. 
+The LMSR cost function is given by:
+
+\begin{equation}
+    C(q_A, q_B) = b \ln (e^{q_A / b} + e^{q_B / b})
+\end{equation}
+
+where $q_A$ and $q_B$ are the number of outsanding contracts for outcomes 
+$A$ and $B$ respectively, and $b$ is a liquidity parameter that determines  
+the curvature of the cost function (ie. how quickly prices adjust).
+
+The price of a contract for outcome $A$, denoted as $q_t$ is derived as:
+
+\begin{equation}
+    q_t = \frac{e^{q_A / b}}{e^{q_A / b} + e^{q_B / b}}
+\end{equation}
+
+Similarly, the price of a contract for outcome $B$ is given by:
+
+\begin{equation}
+    1 - q_t = \frac{e^{q_B / b}}{e^{q_A / b} + e^{q_B / b}}
+\end{equation}
+
+As traders buy and sell contracts, the outstanding quantities 
+$q_A$ and $q_B$ are updated, and the price $q_t$ is recalculated.
+The LMSR guarantees that the market price continuously 
+reflects the aggregate information of traders by ensuring that the price 
+update follows a smooth function of the quantity of contracts traded.
+
+The total cost incurred by a trader purchasing $\Delta q_A$ additional 
+contracts for outcome $A$ is given by:
+
+\begin{equation}
+    C(q_A + \Delta q_A, q_B) - C(q_A, q_B) = b \ln (1 + e^{\Delta q_A / b})
+\end{equation}
+
+This mechanism prevents arbitrage opportunities while ensuring that no individual 
+trader can manipulate prices without incurring increasing costs. 
+
+Under the LMSR mechanism, the contract price $q_t$ represents 
+a market-implied probability of the event occuring. If market participants 
+collectively believe the model's probability $p_t$ is incorrect, 
+trading will drive the contract price toward the consensus belief. 
+Consequently, the LMSR algorithm serves as a continuous 
+price discovery mechanism, aligning $q_t$ with the collective
+expectations of market participants.
+
+\subsection{Participants}
+
+Suppose that a virtual trader or bot that believes the model is active 
+in the market, and enters period $y$ with a portfolio $(y_{t-1}, z_{t-1})$
+inherited from the previous period. Here, $y_{t-1}$ is the amount of cash held 
+at the start of period $t$, and $z_{t-1}$ is the number of contracts held. It 
+is possible for $z_{t-1}$ to be nefative, in which case the trader has 
+previously sold (rather than purchased) contracts on balance, and is 
+therefore betting that event $A$ will not occur.
+
+The trader must now decide whether to buy or sell contracts in period $t$,
+having observed the model forecast $p_t$ and the market price $q_t$. 
+Let $x_t$ denote the number of contracts trader in period $t$. 
+If $x_t > 0$ then contracts are purchased, $z_t$ exceeds $z_{t-1}$ by this amount 
+and $y_t$ is lower than $y_{t-1}$ by an amount equal to the cost 
+$q_t x_t$ of the contracts bought. 
+If $x_t < 0$, then contracts are sold, $z_t$ is lower than $z_{t-1}$ by this 
+amount and $y_t$ is higher than $y_{t-1}$ by an amount equal to the 
+revenue $q_t x_t$ from the sale of the contracts. That is, the portfolio 
+passed on to the subsequent period is given by:
+
+\begin{equation}
+    \begin{aligned}
+        y_t & = y_{t-1} - q_t x_t \\
+        z_t & = z_{t-1} + x_t
+    \end{aligned}
+\end{equation}
+
+But how is $x_t$ determined? When all contracts are resolved, 
+the terminal cash value or wealth resulting from portfolio $(y_t, z_t)$ is:
+
+\begin{equation}
+    W = y_t + s z_t 
+\end{equation}
+
+That is, the trader is left with $y_t + z_t$ if $s = 1$ and $y_t$ otherwise.
+We assume that the trader is risk-averse and maximizes the expected utility 
+of terminal wealth, given by: 
+
+\begin{equation}
+    E(u) = p_t u (y_t + z_t) + (1 - p_t) u (y_t)
+\end{equation}
+
+where $u$ is a concave utility function. 
+This objective function can be written in terms of the decision variable 
+$x_t$, the interhited portfolio $(y_{t-1}, z_{t-1})$, the model forecast
+$p_t$ and the market price $q_t$ by substituting the expressions for
+$y_t$ and $z_t$ into the expression for $E(u)$:
+
+\begin{equation}
+    E(u) = p_t u (y_{t-1} - q_t x_t + x_t) + (1 - p_t) u (y_{t-1} - q_t x_t)
+\end{equation}
+
+This is the expected value of terminal wealth given current beliefs, 
+conditional on the portfolio $(y_t, z_t)$, being held to expiration.
+The trader knows that beliefs are likely to change, but cannot know the extent
+or direction of these future shifts, and accordingly optimizes 
+based on the model forecast and market price available at $t$. 
+
+A trading bot programmed to execute transactions in accordance with 
+the maximization of expected utility will trade whenever there is a change 
+in the model forecast or the market price. 
+
+Any such trades must be consistent with solvency even in the worst case scenario.
+That is, the trading bot chooses $x_t$ to 
+maximize the expected utility of terminal wealth, subject to the constraint
+
+\begin{equation}
+    \begin{aligned}
+        y_t \geq 0 \\
+        y_t + s z_t \geq 0
+    \end{aligned}
+\end{equation}
+
+The first constraint states simply that the cash position at any date cannot become 
+negative, and the second states that the trader must have enough cash to cover 
+all obligations if contract holdings are negative (so the trader is betting against the event A)
+and it turns out that event A occurs.
+
+We look for itendifying hypothetical 
+trades that would have been executed by the trader on each period,
+starting with an initial cash position $y_0 = \$ 1000$
+and an initial contract position $z_0 = 0$. 
+The market has two contracts 
+referencing the same event, one for each outcome.
+
+In order to determine the sequence of trades $x_t$, 
+we need to specify the utility function 
+that represents the preferences of this virtual trader. 
+A useful class of functions for which the degree of risk aversion 
+can be tuned for experimental purposes is that 
+exhibiting constant relative risk aversion (CRRA):
+
+\begin{equation}
+    \begin{aligned}
+        u(w) = \frac{1}{1 - \rho} w^{1 - \rho} \quad \text{for} \quad \rho \geq 0, \rho \neq 1 \\
+        u(w) = \ln w \quad \text{for} \quad \rho = 1
+    \end{aligned}
+\end{equation}
+
+where $\rho$ is the coefficient of relative risk aversion. 
+We assume the simple case of $\rho = 1$, corresponding to logarithmic utility.
+
+\subsection{Event and Models}
+
+We consider a simple time serie $X_t$
+that evolves over time according to a stochastic process 
+with a deterministic trend component. 
+The event of intereset is whether this series exceeds a 
+predefined threshold $\theta$ at the end of the period $T$. 
+Formally, we define the event as:
+
+\begin{equation}
+    s = 1(X_T \geq \theta)
+\end{equation}
+
+where $1(\cdot)$ is the indicator function that takes the value 
+1 if the condition is met and 0 otherwise. 
+
+The probability of this event occuring at each time $t$ is denoted by $p_t$,
+which represents the subjective probability assigned by 
+the forecasting model. 
+
+We consider two distinct types of markets participants,
+each with a different approach to estimating $p_t$. 
+These two participant represent different levels of 
+sophistication in their forecasting methods.
+
+\subsubsection{Naive Bayesian Trader}
+
+The first type of trader follows a simple 
+Bayesian updating rule, treating the most recently observed 
+value $X_t$ as the best available information to 
+update their beliefs about $s$. This trader assumes 
+that $X_t$ follows a random walk with constant variance and updates 
+their probability estimate as:
+
+\begin{equation}
+    p_t = P(X_T \geq \theta | X_t) \propto P(X_t \geq \theta | X_t, \sigma^2)
+\end{equation}
+
+where $\sigma^2$ represents the perceived variance of future increments.
+
+Under the naive assumption that $X_t$ follwos a normal distribution 
+centered at $X_t$, the Bayesian trader sets:
+
+\begin{equation}
+    p_t = 1 - \Phi \left( \frac{\theta - X_t}{\sigma \sqrt{T - t}} \right)
+\end{equation}
+
+where $\Phi(\cdot)$ is the standard normal cumulative distribution function.
+This trader only reacts to the latest observed value.
+
+\subsubsection{Statistical Traders (Sophisticated)}
+
+The second type of participant represents an expert trader, 
+who incorportes a simple statistical model to 
+make a more informed forecast. Instead of relying solely on the latest 
+value $X_t$, this trader fits a linear trend model 
+to the observed series and projects forward to estimate $p_t$. 
+Assuming a simple trend model:
+
+\begin{equation}
+    X_t = \alpha + \beta t + \epsilon_t
+\end{equation}
+
+where $\alpha$ and $\beta$ are the intercept and slope of the trend line,
+and $\epsilon_t$ is a white noise error term.
+The expert estimates $\alpha$ and $\beta$ using rolling regression 
+over past observations and then predicts the final value:
+
+\begin{equation}
+    \hat{X}_T = \hat{\alpha} + \hat{\beta} T
+\end{equation}
+
+The expert then derives their probability estimates as:
+
+\begin{equation}
+    p_t = 1 - \Phi \left( \frac{\theta - \hat{X}_T}{\sigma \sqrt{T - t}} \right)
+\end{equation}
+
+Since this trader incoporates the estimated 
+trend $\hat{\beta}$, their probability estimates may 
+significantly differ from those of the Bayesian trader, 
+especially in the presence of strong upward or downward trends in $X_t$.

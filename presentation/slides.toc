@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Sources of Transition Risks in the Cash Flows Channel}{3}{0}{1}
+\beamer@sectionintoc {2}{The Importance of the Revenue Dimension}{5}{0}{2}
+\beamer@sectionintoc {3}{Green (Brown) Stocks Outperformance (Underperformance)}{7}{0}{3}
+\beamer@sectionintoc {4}{Carbon Intensity Doesn't Tell the Whole Story}{13}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{19}{0}{5}
